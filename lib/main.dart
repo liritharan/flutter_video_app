@@ -1,7 +1,8 @@
 import 'package:flutter_video_app/list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
-
+import 'package:flutter_video_app/model/video_model.dart';
+import 'const.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -18,49 +19,40 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage>{
+List <VideoModel> videoModel;
+  @override
+  void initState(){
+    super.initState();
+    videoModel = Constants.getVideoName();
+  }
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Video Player'),
       ),
-      body: ListView(
-        children: <Widget>[
+      body: ListView.builder(
+        itemCount: videoModel.length,
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
+        itemBuilder: (BuildContext context, int index){
+          return ChewieListItem(
+                videoPlayerController: VideoPlayerController.network(
+                  'https://test.api.ijeeni.com/files/${videoModel[index].name}',
 
-          ChewieListItem(
-            videoPlayerController: VideoPlayerController.network(
-              'https://api.ijeeni.com/post/1613979489427.mp4',
-            ),
-            looping: true,
-          ),
-          ChewieListItem(
-            videoPlayerController: VideoPlayerController.network(
-              'https://api.ijeeni.com/post/1613825806693.mp4',
-            ),
-          ),
-          ChewieListItem(
-            videoPlayerController: VideoPlayerController.network(
-              'https://api.ijeeni.com/post/1613825446865.mp4',
-            ),
-          ),
-          ChewieListItem(
-            videoPlayerController: VideoPlayerController.network(
-              'https://api.ijeeni.com/post/1613825451275.mp4',
-            ),
-          ),
-          ChewieListItem(
-            videoPlayerController: VideoPlayerController.network(
-              'https://api.ijeeni.com/post/1613825381759.mp4',
-            ),
-          ),
-          // ChewieListItem(
-          //   // This URL doesn't exist - will display an error
-          //   videoPlayerController: VideoPlayerController.network(
-          //     '',
-          //   ),
-          // ),
-        ],
+                ),
+
+                looping: true,
+
+              );
+
+        }
+
       ),
     );
   }
