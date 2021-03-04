@@ -104,7 +104,7 @@ static List<VideoModel> getVideoName(){
     new VideoModel("1587544437780.mp4"),
     new VideoModel("1587544516652.mp4"),
     new VideoModel("1587629948828.mp4"),
-    new VideoModel("1587632464091.mp4"), 
+    new VideoModel("1587632464091.mp4"),
     new VideoModel("1587644181964.mp4"),
     new VideoModel("1587990850546.mp4"),
     new VideoModel("1588180173179.mp4"),
